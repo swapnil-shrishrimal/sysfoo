@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: mvn test
       - store_artifacts:
-                path: /home/circleci/project/target/sysfoo.war
+                path: /home/circleci/project/target/
                 destination: /bin/final_build
 
   build:
