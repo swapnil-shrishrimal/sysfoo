@@ -9,6 +9,8 @@ jobs:
       - steps:
           - checkout
           - run: mvn test
+          - store_artifacts:
+                path: /tmp/
 
   build:
     docker:
@@ -19,7 +21,6 @@ jobs:
     steps:
       - checkout
       - run: ./mvnw -Dmaven.test.skip=true package
-      - mv target/*.war $CIRCLE_ARTIFACTS/
 
 workflows:
   version: 2
