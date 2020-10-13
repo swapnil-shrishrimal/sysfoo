@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run: mvn -Dmaven.test.skip=true package
       - store_artifacts:
-                path: /tmp/
+                path: /home/circleci/project/target/
 
 workflows:
   version: 2
