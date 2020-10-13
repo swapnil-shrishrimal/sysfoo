@@ -1,34 +1,6 @@
-version: 2.0
+test:
+  override:
+    - mvn package
 
-jobs:
-  test:
-    docker:
-      - image: circleci/openjdk:stretch
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: mvn test
-
-  build:
-    docker:
-      - image: circleci/openjdk:stretch
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: mvn -Dmaven.test.skip=true package
-
-workflows:
-  version: 2
-
-  build-then-test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
-            
-  
+  post:
+    - mv target/*.war $CIRCLE_ARTIFACTS/
