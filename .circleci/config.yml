@@ -10,8 +10,7 @@ jobs:
     steps:
       - checkout
       - run: mvn test
-      - store_artifacts:
-                path: /tmp/
+      
 
   build:
     docker:
@@ -22,6 +21,8 @@ jobs:
     steps:
       - checkout
       - run: mvn -Dmaven.test.skip=true package
+      - store_artifacts:
+                path: /tmp/
 
 workflows:
   version: 2
