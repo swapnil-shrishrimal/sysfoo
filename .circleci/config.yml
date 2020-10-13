@@ -11,8 +11,7 @@ jobs:
       - checkout
       - run: mvn test
       - store_artifacts:
-                path: /home/circleci/project/target/
-                destination: /bin/final_build
+                path: /tmp/
 
   build:
     docker:
