@@ -31,6 +31,4 @@ workflows:
           requires:
             - build
             
-working_directory: /tmp
-   - store_artifacts:
-          path: /tmp/artifact-1
+  
