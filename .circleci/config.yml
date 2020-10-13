@@ -1,4 +1,5 @@
-version: 2.1
+version: 2.0
+
 jobs:
   test:
     docker:
@@ -6,11 +7,11 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - steps:
-          - checkout
-          - run: mvn test
-          - store_artifacts:
-                path: /tmp/
+    steps:
+      - checkout
+      - run: mvn test
+      - store_artifacts:
+                path: /bin/final_build
 
   build:
     docker:
@@ -20,7 +21,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: ./mvnw -Dmaven.test.skip=true package
+      - run: mvn -Dmaven.test.skip=true package
 
 workflows:
   version: 2
@@ -31,8 +32,3 @@ workflows:
       - test:
           requires:
             - build
-     #override:
-       #- mvn package
-
-  #post:
-    #- mv target/*.war $CIRCLE_ARTIFACTS/
